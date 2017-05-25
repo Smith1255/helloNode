@@ -10,8 +10,13 @@ app.get('/node', function(req, res) {
 app.get('/', function(req, res) {
         res.send("Hello Node!");
 });
+app.get('/node1', function(req, res) {
+        res.send("...Node!");
+});
 
 app.listen(8080, function() {
 	console.log("Spinning up on port 8080...");
 });
+
+
 
