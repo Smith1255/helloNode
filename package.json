@@ -17,7 +17,12 @@
   },
   "homepage": "https://github.com/smith1255/helloNode#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "debug-log": "^1.0.1",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "mongodb": "^2.2.27"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
