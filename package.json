@@ -1,0 +1,23 @@
+{
+  "name": "hellonode",
+  "version": "1.0.0",
+  "description": "Simple node application to spawn a webserver with two endpoints",
+  "main": "helloNode.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smith1255/helloNode.git"
+  },
+  "author": "Andrew Smith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smith1255/helloNode/issues"
+  },
+  "homepage": "https://github.com/smith1255/helloNode#readme",
+  "dependencies": {
+    "debug-log": "^1.0.1",
+    "express": "^4.15.3"
+  }
+}
