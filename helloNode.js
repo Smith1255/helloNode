@@ -20,16 +20,31 @@ app.get('/hello', function(req, res){
 
 app.get('/', function(req, res){
 	db.collection('hello').find().toArray(function(err, results){
-	if (err) return console.log(err);
-	res.render('index.ejs', {hello: results});
-	});
+        if (err) return console.log(err);
+        res.render('index.ejs', {hello: results});
+    });
 });
-app.post('/hello', function(req, res) {
+app.post('/', function(req, res) {
 	db.collection('hello').save(req.body, function(err, results){
 		if (err) return console.log(err);
 		console.log('saved to database');
 		res.redirect('/');
 	});
+});
+app.put('/', function(req, res) {
+    db.collection('hello')
+    .findOneAndUpdate({name: 'Andrew'}, {
+        $set: {
+            name: req.body.name,
+            quote: req.body.quote
+        }
+    }, {
+        sort: {_id: -1},
+        upsert: true
+    }, function(err, result) {
+    if (err) return res.send(err);
+    res.send(result)
+    })
 });
 
 app.set('view engine', 'ejs');
