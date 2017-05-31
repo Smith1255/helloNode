@@ -2,6 +2,10 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var mongo = require('mongodb').MongoClient;
+app.use(bodyParser.json());
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended: true}));
+app.set('view engine', 'ejs');
 var db;
 
 mongo.connect('mongodb://noder:1234@ds111529.mlab.com:11529/hellonode', function(err, database) {
@@ -11,8 +15,6 @@ mongo.connect('mongodb://noder:1234@ds111529.mlab.com:11529/hellonode', function
 		console.log('listening on 8080');
 	})
 });
-
-app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/hello', function(req, res){
 	res.send("Hello....");
@@ -33,7 +35,7 @@ app.post('/', function(req, res) {
 });
 app.put('/', function(req, res) {
     db.collection('hello')
-    .findOneAndUpdate({name: 'Andrew'}, {
+    .findOneAndUpdate({name: 'Andrew Smith'}, {
         $set: {
             name: req.body.name,
             quote: req.body.quote
@@ -46,5 +48,10 @@ app.put('/', function(req, res) {
     res.send(result)
     })
 });
-
-app.set('view engine', 'ejs');
+app.delete('/', function(req, res) {
+    db.collection('hello').findOneAndDelete({name: req.body.name},
+    function(err, result) {
+    if (err) return res.send(500, err);
+    res.json('A quote got deleted');
+})
+});
